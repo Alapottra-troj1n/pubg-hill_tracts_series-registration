@@ -12,6 +12,13 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        teko: "var(--font-teko)",
+        lato: "var(--font-lato)",
+      },
+      backgroundImage: {
+        "hero-pattern": "url('/688.jpg')",
+      }
     },
   },
   plugins: [],
