@@ -4,7 +4,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
-import { Facebook } from "lucide-react";
+import { Facebook, Info } from "lucide-react";
+import { useState } from "react";
 
 export default function Home() {
   type TeamRegistration = {
@@ -24,11 +25,16 @@ export default function Home() {
     substituteCharacterID?: string; // Substitute Character ID
   };
 
+  const [show,setShow] = useState(false)
+
+
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<TeamRegistration>();
+
   const onSubmit: SubmitHandler<TeamRegistration> = (data) => console.log(data);
 
   return (
@@ -100,7 +106,7 @@ export default function Home() {
             </div>
           </div>
           <div>
-            <form action="">
+            <form onSubmit={handleSubmit(onSubmit)} action="">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-2 text-white text-sm ">
                 <div>
                   <input
@@ -129,7 +135,17 @@ export default function Home() {
                     required
                   />
                 </div>
-                <div>
+                <div className="relative">
+                <Info onClick={()=> setShow(!show)} onMouseEnter={()=> setShow(true)} onMouseLeave={()=>setShow(false)} className="absolute top-[10px] right-3 cursor-pointer" />
+                  {
+                    show && (
+                      <div>
+                        <div className="absolute top-9 right-10 bg-[#1a1919] p-2 text-white text-xs font-lato  border-[#9de649] border-4">
+                         <img src="/id.gif" alt="" />
+                        </div>
+                        </div>
+                    )
+                  }
                   <input
                     placeholder="Captain Character ID"
                     type="text"
