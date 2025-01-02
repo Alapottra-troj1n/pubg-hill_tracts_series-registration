@@ -375,11 +375,9 @@ export default function Home() {
                 <button
                   disabled={loading}
                   type="submit"
-                  className="bg-[#AAE43E] hover:bg-white transition disabled:bg-[#85b134]  px-5 lg:text-2xl py-3 mt-7 mb-14 text-gray-800 font-medium  font-teko uppercase text-base"
+                  className="bg-[#AAE43E] hover:bg-white text-center transition disabled:bg-[#688a29]  px-5 lg:text-2xl py-3 mt-7 mb-14 text-gray-800 font-medium  font-teko uppercase text-base"
                 >
-                  {loading
-                    ? "Submitting..."
-                    : "Register For The Hill Tracts Battlegrounds Series"}
+                Register For The Hill Tracts Battlegrounds Series
                 </button>
               </div>
             </form>
