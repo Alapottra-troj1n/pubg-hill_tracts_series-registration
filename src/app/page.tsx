@@ -216,7 +216,7 @@ export default function Home() {
                     onClick={() => setShow(!show)}
                     onMouseEnter={() => setShow(true)}
                     onMouseLeave={() => setShow(false)}
-                    className="absolute top-[10px] right-3 cursor-pointer"
+                    className="absolute top-[14px] right-3 cursor-pointer"
                   />
                   {show && (
                     <div>
