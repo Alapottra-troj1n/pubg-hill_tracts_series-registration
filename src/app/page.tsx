@@ -6,6 +6,8 @@ import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
 import { Facebook, Info } from "lucide-react";
 import { useState } from "react";
+import { createClient } from "@/utils/supabase/client";
+import toast from "react-hot-toast";
 
 export default function Home() {
   type TeamRegistration = {
@@ -25,17 +27,91 @@ export default function Home() {
     substituteCharacterID?: string; // Substitute Character ID
   };
 
-  const [show,setShow] = useState(false)
+  const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-
+  const supabase = createClient();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<TeamRegistration>();
 
-  const onSubmit: SubmitHandler<TeamRegistration> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<TeamRegistration> = async (data) => {
+    setLoading(true);
+
+    //check if all non optional fields are filled
+    if (
+      !data.captainFullName ||
+      !data.captainGameName ||
+      !data.captainMobileNumber ||
+      !data.captainCharacterID ||
+      !data.captainEmailAddress ||
+      !data.squadName ||
+      !data.teamMember1FullName ||
+      !data.teamMember1CharacterID ||
+      !data.teamMember2FullName ||
+      !data.teamMember2CharacterID ||
+      !data.teamMember3FullName ||
+      !data.teamMember3CharacterID
+    ) {
+      toast.error("Please fill all the required fields.");
+      return;
+    }
+
+    const transformedData = {
+      captain_full_name: data.captainFullName,
+      captain_game_name: data.captainGameName,
+      captain_mobile_number: data.captainMobileNumber,
+      captain_character_id: data.captainCharacterID,
+      captain_email_address: data.captainEmailAddress,
+      squad_name: data.squadName,
+      team_member1_full_name: data.teamMember1FullName,
+      team_member1_character_id: data.teamMember1CharacterID,
+      team_member2_full_name: data.teamMember2FullName,
+      team_member2_character_id: data.teamMember2CharacterID,
+      team_member3_full_name: data.teamMember3FullName,
+      team_member3_character_id: data.teamMember3CharacterID,
+      substitute_full_name: data.substituteFullName || null, // Optional field
+      substitute_character_id: data.substituteCharacterID || null, // Optional field
+    };
+
+    try {
+      const { data: existData } = await supabase
+        .from("registrations")
+        .select("*")
+        .eq("captain_email_address", data.captainEmailAddress);
+
+      console.log(existData, "exist");
+
+      if ((existData || []).length > 0) {
+        toast.error(
+          `You have already registered with ${data.captainEmailAddress}.`
+        );
+        return;
+      }
+
+      const { data: registration, error } = await supabase
+        .from("registrations")
+        .insert([transformedData]);
+
+      if (!error) {
+        reset();
+        toast.success(
+          `Registration Successful! ${transformedData.captain_full_name}. You will be contacted soon. Good luck!`
+        ,{duration: 10000});
+      } else {
+        toast.error("An error occurred. Please try again later.");
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error("An error occurred. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="bg-hero-pattern bg-top bg-cover min-h-screen">
@@ -50,7 +126,7 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[70%,30%] gap-16 lg:gap-28 mt-8 placeholder-shown:text-xs ">
-        <div className="text-white lg:hidden">
+          <div className="text-white lg:hidden">
             <div className="font-teko font-semibold text-3xl  ">
               <h2 className="px-2 ">
                 How to Register for the <br />
@@ -106,7 +182,7 @@ export default function Home() {
             </div>
           </div>
           <div>
-            <form onSubmit={handleSubmit(onSubmit)} action="">
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-2 text-white text-sm ">
                 <div>
                   <input
@@ -136,16 +212,19 @@ export default function Home() {
                   />
                 </div>
                 <div className="relative">
-                <Info onClick={()=> setShow(!show)} onMouseEnter={()=> setShow(true)} onMouseLeave={()=>setShow(false)} className="absolute top-[10px] right-3 cursor-pointer" />
-                  {
-                    show && (
-                      <div>
-                        <div className="absolute top-9 right-10 bg-[#1a1919] p-2 text-white text-xs font-lato  border-[#9de649] border-4">
-                         <img src="/id.gif" alt="" />
-                        </div>
-                        </div>
-                    )
-                  }
+                  <Info
+                    onClick={() => setShow(!show)}
+                    onMouseEnter={() => setShow(true)}
+                    onMouseLeave={() => setShow(false)}
+                    className="absolute top-[10px] right-3 cursor-pointer"
+                  />
+                  {show && (
+                    <div>
+                      <div className="absolute top-9 right-10 bg-[#1a1919] p-2 text-white text-xs font-lato  border-[#9de649] border-4">
+                        <img src="/id.gif" alt="" />
+                      </div>
+                    </div>
+                  )}
                   <input
                     placeholder="Captain Character ID"
                     type="text"
@@ -157,7 +236,7 @@ export default function Home() {
                 <div>
                   <input
                     placeholder="Captain Email Address"
-                    type="text"
+                    type="email"
                     className="bg-[#1a1919] border-[#8cbb36] w-full px-3 py-3  border placeholder-shown:text-sm "
                     {...register("captainEmailAddress")}
                     required
@@ -247,8 +326,6 @@ export default function Home() {
                   />
                 </div>
 
-               
-
                 <div>
                   <input
                     placeholder="Substitute Full Name"
@@ -266,10 +343,6 @@ export default function Home() {
                     {...register("substituteCharacterID")}
                   />
                 </div>
-
-               
-
-
               </div>
               <div className="flex items-center gap-5 mt-7 text-white text-xs font-bold font-lato ">
                 <input
@@ -300,10 +373,13 @@ export default function Home() {
               </div>
               <div>
                 <button
+                  disabled={loading}
                   type="submit"
                   className="bg-[#AAE43E] hover:bg-white transition disabled:bg-[#85b134]  px-5 lg:text-2xl py-3 mt-7 mb-14 text-gray-800 font-medium  font-teko uppercase text-base"
                 >
-                  Register For The Hill Tracts Battlegrounds Series
+                  {loading
+                    ? "Submitting..."
+                    : "Register For The Hill Tracts Battlegrounds Series"}
                 </button>
               </div>
             </form>
@@ -367,23 +443,19 @@ export default function Home() {
         </div>
       </div>
       <div className="bg-[#1b1b1b] w-full py-12 mt-12 min-h-24 border-t-[1px] border-[#a7df3e]">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-0 justify-between items-center">
-          <Facebook  size={26} className="stroke-[#8cbb36] " />
-          <div className="flex flex-col lg:flex-row gap-5 font-teko">
-            <h4 className="text-white text-sm font-lato font-bold">
-             TERMS & CONDITIONS
-            </h4>
-            <h4 className="text-white text-sm font-lato font-bold">
-             CONTACT
-            </h4>
+        <div className="max-w-6xl mx-auto px-5">
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-0 justify-between items-start">
+            <Facebook size={26} className="stroke-[#8cbb36] " />
+            <div className="flex flex-col lg:flex-row gap-5 font-teko">
+              <h4 className="text-white text-sm font-lato font-bold">
+                TERMS & CONDITIONS
+              </h4>
+              <h4 className="text-white text-sm font-lato font-bold">
+                CONTACT
+              </h4>
+            </div>
           </div>
-          </div>
-
-
-
         </div>
-
       </div>
     </div>
   );

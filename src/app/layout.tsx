@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lato, Teko } from "next/font/google";
 import "./globals.css";
 import 'react-calendar/dist/Calendar.css';
+import { Toaster } from "react-hot-toast";
 
 const teko = Teko({
   variable: "--font-teko",
@@ -34,6 +35,7 @@ export default function RootLayout({
         className={`${teko.variable} ${lato.variable}  antialiased font-lato`}
       >
         {children}
+        <Toaster/>
       </body>
     </html>
   );
