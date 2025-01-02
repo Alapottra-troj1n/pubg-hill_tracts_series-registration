@@ -182,13 +182,13 @@ export default function Home() {
             </div>
           </div>
           <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-2 text-white text-sm ">
+            <form className="font-teko" onSubmit={handleSubmit(onSubmit)}>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-2 text-white text-lg font-light tracking-wide">
                 <div>
                   <input
                     placeholder="Captain Full Name (As Per Govt. ID)"
                     type="text"
-                    className="bg-[#1a1919] border-[#8cbb36] w-full px-3 py-3  border placeholder-shown:text-sm "
+                    className="bg-[#1a1919] border-[#8cbb36] w-full px-3 py-3  border  "
                     {...register("captainFullName")}
                     required
                   />
@@ -197,7 +197,7 @@ export default function Home() {
                   <input
                     placeholder="Captain Game Name"
                     type="text"
-                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border placeholder-shown:text-sm"
+                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border "
                     {...register("captainGameName")}
                     required
                   />
@@ -206,7 +206,7 @@ export default function Home() {
                   <input
                     placeholder="Captain Mobile Number"
                     type="text"
-                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border placeholder-shown:text-sm"
+                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border "
                     {...register("captainMobileNumber")}
                     required
                   />
@@ -228,7 +228,7 @@ export default function Home() {
                   <input
                     placeholder="Captain Character ID"
                     type="text"
-                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border placeholder-shown:text-sm"
+                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border "
                     {...register("captainCharacterID")}
                     required
                   />
@@ -237,7 +237,7 @@ export default function Home() {
                   <input
                     placeholder="Captain Email Address"
                     type="email"
-                    className="bg-[#1a1919] border-[#8cbb36] w-full px-3 py-3  border placeholder-shown:text-sm "
+                    className="bg-[#1a1919] border-[#8cbb36] w-full px-3 py-3  border  "
                     {...register("captainEmailAddress")}
                     required
                   />
@@ -260,7 +260,7 @@ export default function Home() {
                   <input
                     placeholder="Squad Name"
                     type="text"
-                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border placeholder-shown:text-sm"
+                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border"
                     {...register("squadName")}
                     required
                   />
@@ -271,7 +271,7 @@ export default function Home() {
                     placeholder="Team Member 1 Full Name (As Per Gov.ID)"
                     type="text"
                     required
-                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border placeholder-shown:text-sm"
+                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border"
                     {...register("teamMember1FullName")}
                   />
                 </div>
@@ -281,7 +281,7 @@ export default function Home() {
                     placeholder="Team Member 1 Character ID"
                     type="text"
                     required
-                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border placeholder-shown:text-sm"
+                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border "
                     {...register("teamMember1CharacterID")}
                   />
                 </div>
@@ -291,7 +291,7 @@ export default function Home() {
                     placeholder="Team Member 2 Full Name (As Per Gov.ID)"
                     type="text"
                     required
-                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border placeholder-shown:text-sm"
+                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border "
                     {...register("teamMember2FullName")}
                   />
                 </div>
@@ -301,7 +301,7 @@ export default function Home() {
                     placeholder="Team Member 2 Character ID"
                     type="text"
                     required
-                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border placeholder-shown:text-sm"
+                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border "
                     {...register("teamMember2CharacterID")}
                   />
                 </div>
@@ -311,7 +311,7 @@ export default function Home() {
                     placeholder="Team Member 3 Full Name (As Per Gov.ID)"
                     type="text"
                     required
-                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border placeholder-shown:text-sm"
+                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border "
                     {...register("teamMember3FullName")}
                   />
                 </div>
@@ -321,7 +321,7 @@ export default function Home() {
                     placeholder="Team Member 3 Character ID"
                     type="text"
                     required
-                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border placeholder-shown:text-sm"
+                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border "
                     {...register("teamMember3CharacterID")}
                   />
                 </div>
@@ -330,7 +330,7 @@ export default function Home() {
                   <input
                     placeholder="Substitute Full Name"
                     type="text"
-                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border placeholder-shown:text-sm"
+                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border "
                     {...register("substituteFullName")}
                   />
                 </div>
@@ -339,7 +339,7 @@ export default function Home() {
                   <input
                     placeholder="Substitute Character ID"
                     type="text"
-                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border placeholder-shown:text-sm"
+                    className="bg-[#1a1919] border-[#8cbb36]  w-full px-3 py-3  border "
                     {...register("substituteCharacterID")}
                   />
                 </div>
