@@ -42,6 +42,9 @@ export default function Home() {
   const onSubmit: SubmitHandler<TeamRegistration> = async (data) => {
     setLoading(true);
 
+    toast.error("Registration opens at 13th January. Please try again later.");
+    return;
+
     //check if all non optional fields are filled
     if (
       !data.captainFullName ||
@@ -115,6 +118,10 @@ export default function Home() {
 
   return (
     <div className="bg-hero-pattern bg-top bg-cover min-h-screen">
+      <div className="bg-red-500 py-2 text-center absolute top-0 w-full text-white">
+        <h2>Registration opens on January 13th—stay tuned for more updates!</h2>
+
+      </div>
       <div className="max-w-6xl mx-auto px-5 lg:px-0 ">
         <div className="flex justify-center flex-col items-center ">
           <div className="flex flex-col lg:flex-row lg:gap-2 items-center mb-12 lg:mb-0">
