@@ -127,7 +127,7 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row lg:gap-2 items-center mb-12 lg:mb-0">
             <Image width={250} height={250} alt="logo" src={"/logo-min.png"} />
             <h2 className=" text-4xl text-center lg:text-left lg:text-5xl font-bold text-white font-teko lg:mt-6 ">
-              Battle for Supremacy Among the Hills
+              Battle for Supremacy Among the Hills 
             </h2>
           </div>
         </div>
@@ -138,8 +138,8 @@ export default function Home() {
               <h2 className="px-2 ">
                 How to Register for the <br />
               </h2>
-              <h2 className=" text-nowrap px-2 text-[#aae43e] ">
-                Hill Tracts Battlegrounds Series
+              <h2 className="px-2 text-[#aae43e] ">
+                <span className="text-[#F2AA00]">PUBG MOBILE</span><br /> Hill Tracts Battlegrounds Series
               </h2>
 
               <h4 className="text-base font-medium px-2 font-lato text-[#e4e4e4] mt-1">
@@ -384,7 +384,7 @@ export default function Home() {
                   type="submit"
                   className="bg-[#AAE43E] hover:bg-white text-center transition disabled:bg-[#688a29]  px-5 lg:text-2xl py-3 mt-7 mb-14 text-gray-800 font-medium  font-teko uppercase text-base"
                 >
-                Register For The Hill Tracts Battlegrounds Series
+                 Register For The Hill Tracts Battlegrounds Series
                 </button>
               </div>
             </form>
@@ -395,8 +395,12 @@ export default function Home() {
               <h2 className="px-2 ">
                 How to Register for the <br />
               </h2>
+              <h2 className=" text-nowrap px-2 text-[#F2AA00] ">
+             PUBG MOBILE
+              </h2>
+              
               <h2 className=" text-nowrap px-2 text-[#aae43e] ">
-                Hill Tracts Battlegrounds Series
+              Hill Tracts Battlegrounds Series
               </h2>
 
               <h4 className="text-base font-medium px-2 font-lato text-[#e4e4e4] mt-1">
