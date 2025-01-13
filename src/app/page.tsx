@@ -42,7 +42,7 @@ export default function Home() {
   const onSubmit: SubmitHandler<TeamRegistration> = async (data) => {
     setLoading(true);
 
-    toast.error("Registration is closed now. Please try again later.");
+    toast.error("Registration is closed now. Please try again after 9pm.");
     return;
 
   
