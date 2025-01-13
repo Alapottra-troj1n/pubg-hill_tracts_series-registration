@@ -42,6 +42,9 @@ export default function Home() {
   const onSubmit: SubmitHandler<TeamRegistration> = async (data) => {
     setLoading(true);
 
+    toast.error("Registration is closed now. Please try again later.");
+    return;
+
   
 
     //check if all non optional fields are filled
