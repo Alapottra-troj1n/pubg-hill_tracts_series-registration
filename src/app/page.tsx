@@ -42,6 +42,9 @@ export default function Home() {
   const onSubmit: SubmitHandler<TeamRegistration> = async (data) => {
     setLoading(true);
 
+    toast.error("Registration is closed now. Please try again later.");
+
+    return;
    
   
 
@@ -118,6 +121,10 @@ export default function Home() {
 
   return (
     <div className="bg-hero-pattern bg-top bg-cover min-h-screen">
+      <div className="absolute top-0 py-3 text-white text-center bg-red-500 w-full">
+        <h2>All slots are currently filled. We wish you the best of luck next time!</h2>
+
+      </div>
       
       <div className="max-w-6xl mx-auto px-5 lg:px-0 ">
         <div className="flex justify-center flex-col items-center ">
@@ -377,8 +384,9 @@ export default function Home() {
               </div>
               <div>
                 <button
-                  disabled={loading}
+                  // disabled={loading}
                   type="submit"
+                  disabled
                   className="bg-[#AAE43E] hover:bg-white text-center transition disabled:bg-[#688a29]  px-5 lg:text-2xl py-3 mt-7 mb-14 text-gray-800 font-medium  font-teko uppercase text-base"
                 >
                  Register For The Hill Tracts Battlegrounds Series
